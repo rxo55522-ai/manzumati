@@ -1,0 +1,12 @@
+# /etc/systemd/system/manzumati-checker.timer
+[Unit]
+Description=Run Manzumati checker every 5 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+RandomizedDelaySec=20s
+Persistent=true
+
+[Install]
+WantedBy=timers.target

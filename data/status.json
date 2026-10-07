@@ -1,0 +1,266 @@
+{
+  "children-grant": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "wife-daughters-grant": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "foreign-currency": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "lypay": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "basic-pension": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "social-security": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "consumer-coops": {
+    "state": "down",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 2
+  },
+  "eifaa-card": {
+    "state": "down",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 2
+  },
+  "criminal-record": {
+    "state": "down",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 2
+  },
+  "cement-booking": {
+    "state": "down",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 2
+  },
+  "hajj": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "zakat-app": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "telecom-complaints": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "election-results": {
+    "state": "down",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 2
+  },
+  "evisa": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "youth-travel-fund": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "ratebak": {
+    "state": "down",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 2
+  },
+  "ratebak-stats": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "civil-service": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "labour": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "noc-graduates": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "noc-graduates-disability": {
+    "state": "down",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 2
+  },
+  "exam-results": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "universities-system": {
+    "state": "down",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 2
+  },
+  "equivalency": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "accredited-institutions": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "mhesr-tripoli": {
+    "state": "down",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 2
+  },
+  "mhe-benghazi": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "elmergib-registration": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "asmarya-registration": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "sirte-student-system": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "commercial-registry": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "commercial-registry-system": {
+    "state": "down",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 2
+  },
+  "economy-eservices": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "foreign-branches": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "tax": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "customs": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "upa-companies": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "upa-experts": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "pharma-companies": {
+    "state": "down",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 2
+  },
+  "finance-ministry": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "ejraat": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "gia-services": {
+    "state": "up",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 0
+  },
+  "gov-ly": {
+    "state": "down",
+    "checked_at": "2026-10-07T00:31:00+02:00",
+    "source": "manual",
+    "fails": 2
+  }
+}

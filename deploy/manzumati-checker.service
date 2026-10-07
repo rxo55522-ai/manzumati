@@ -1,0 +1,42 @@
+# /etc/systemd/system/manzumati-checker.service
+# يفحص المنظومات ويعاود بناء الموقع. يشتغل بمستخدم عادي بدون أي صلاحيات زايدة.
+[Unit]
+Description=Manzumati status checker + rebuild
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=manzumati
+Group=manzumati
+WorkingDirectory=/opt/manzumati
+# مجلد الكود ملك root ومقفول، فالمستخدم manzumati ما يقدرش يزرع فيه ملفات بايثون
+ExecStart=/usr/bin/python3 -m manzumati.checker --data /opt/manzumati/data --build /var/www/manzumati
+TimeoutStartSec=180
+UMask=0022
+
+# ---- عزل الخدمة: حتى لو صار فيها خلل، ما تقدرش تلمس باقي السيرفر ----
+NoNewPrivileges=yes
+ProtectSystem=strict
+ReadWritePaths=/opt/manzumati/data /var/www/manzumati
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources
+MemoryMax=256M
