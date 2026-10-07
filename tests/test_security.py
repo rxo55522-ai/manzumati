@@ -362,6 +362,7 @@ class TestChecker(unittest.TestCase):
         self.assertEqual(self.p("/fail"), "fail")
         self.assertEqual(self.p("/inside"), "ok")
         self.assertEqual(self.p("/loop"), "fail")
+        self.assertEqual(self.p("/no-such-page"), "fail")   # 404: الصفحة مش موجودة = واقفة
         self.assertEqual(C.probe("http://127.0.0.1:1/", self.hosts), "fail")
 
     def test_redirect_to_foreign_site_is_suspicious(self):
