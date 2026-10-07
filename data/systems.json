@@ -12,7 +12,16 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": true
+      "popular": true,
+      "keywords": [
+        "منحة الاطفال",
+        "منحة الأبناء",
+        "منحة الصغار",
+        "علاوة الاولاد",
+        "منحه",
+        "اطفال",
+        "mosa"
+      ]
     },
     {
       "id": "wife-daughters-grant",
@@ -24,7 +33,16 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": true
+      "popular": true,
+      "keywords": [
+        "منحة الزوجة",
+        "منحة الزوجات",
+        "منحة البنات",
+        "منحة المرأة",
+        "منحة ربة البيت",
+        "منحه",
+        "زوجة"
+      ]
     },
     {
       "id": "foreign-currency",
@@ -58,7 +76,20 @@
       "registration_closed": false,
       "hidden": false,
       "popular": true,
-      "conditions": "لليبيين الساكنين داخل ليبيا، من عمر 18 سنة وفوق."
+      "conditions": "لليبيين الساكنين داخل ليبيا، من عمر 18 سنة وفوق.",
+      "keywords": [
+        "دولار",
+        "دولارات",
+        "عملة",
+        "العملة",
+        "حجز الدولار",
+        "الاغراض الشخصية",
+        "4000 دولار",
+        "يورو",
+        "صرف",
+        "مصرف ليبيا المركزي",
+        "fcms"
+      ]
     },
     {
       "id": "lypay",
@@ -70,7 +101,17 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": true
+      "popular": true,
+      "keywords": [
+        "دفع",
+        "تحويل",
+        "تحويل فلوس",
+        "دفع الكتروني",
+        "محفظة",
+        "ايبان",
+        "IBAN",
+        "lypay"
+      ]
     },
     {
       "id": "basic-pension",
@@ -82,7 +123,17 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "معاش",
+        "المعاش الاساسي",
+        "معاش اساسي",
+        "التضامن",
+        "ذوي الاعاقة",
+        "بطاقة اعاقة",
+        "مسنين",
+        "ارامل"
+      ]
     },
     {
       "id": "social-security",
@@ -94,7 +145,15 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "معاش",
+        "تقاعد",
+        "المعاش التقاعدي",
+        "الضمان",
+        "اشتراكات",
+        "متقاعدين"
+      ]
     },
     {
       "id": "consumer-coops",
@@ -106,7 +165,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "جمعيات",
+        "الجمعية",
+        "سلع",
+        "تموين",
+        "سلة غذائية"
+      ]
     },
     {
       "id": "eifaa-card",
@@ -118,7 +184,12 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "ايفاء",
+        "بطاقة",
+        "بطاقة التموين"
+      ]
     },
     {
       "id": "criminal-record",
@@ -130,7 +201,15 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "سوابق",
+        "شهادة خلو سوابق",
+        "الحالة الجنائية",
+        "خلو من السوابق",
+        "الداخلية",
+        "فيش"
+      ]
     },
     {
       "id": "cement-booking",
@@ -142,7 +221,13 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "اسمنت",
+        "سمنت",
+        "بناء",
+        "مواد بناء"
+      ]
     },
     {
       "id": "hajj",
@@ -154,7 +239,14 @@
       "steps": [],
       "registration_closed": true,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "حج",
+        "عمرة",
+        "قرعة الحج",
+        "الحجاج",
+        "تسجيل الحج"
+      ]
     },
     {
       "id": "zakat-app",
@@ -166,7 +258,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "زكاة",
+        "الزكاة",
+        "نصاب",
+        "فتوى",
+        "تطبيق"
+      ]
     },
     {
       "id": "telecom-complaints",
@@ -178,7 +277,17 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "شكوى",
+        "شكاوى",
+        "انترنت",
+        "نت",
+        "اتصالات",
+        "ليبيانا",
+        "المدار",
+        "بلاغ"
+      ]
     },
     {
       "id": "election-results",
@@ -190,7 +299,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "انتخابات",
+        "المفوضية",
+        "تسجيل ناخب",
+        "ناخبين",
+        "نتائج"
+      ]
     },
     {
       "id": "evisa",
@@ -202,7 +318,15 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "تأشيرة",
+        "فيزا",
+        "visa",
+        "اجانب",
+        "زيارة",
+        "دعوة"
+      ]
     },
     {
       "id": "youth-travel-fund",
@@ -214,7 +338,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "سفر",
+        "شباب",
+        "منحة سفر",
+        "وزارة الشباب",
+        "رحلة"
+      ]
     },
     {
       "id": "ratebak",
@@ -226,7 +357,19 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": true
+      "popular": true,
+      "keywords": [
+        "مرتب",
+        "مرتبي",
+        "المرتب",
+        "راتب",
+        "راتبي",
+        "المرتبات",
+        "الماهية",
+        "رقم وظيفي",
+        "قيد مالي",
+        "ماهية"
+      ]
     },
     {
       "id": "ratebak-stats",
@@ -238,7 +381,13 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "مرتبات",
+        "احصائية",
+        "الجهات",
+        "بيانات الموظفين"
+      ]
     },
     {
       "id": "civil-service",
@@ -274,7 +423,15 @@
       "steps": [],
       "registration_closed": true,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "نفط",
+        "المؤسسة الوطنية للنفط",
+        "خريجين",
+        "توظيف",
+        "شغل",
+        "وظائف"
+      ]
     },
     {
       "id": "noc-graduates-disability",
@@ -286,7 +443,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "نفط",
+        "ذوي الاعاقة",
+        "خريجين",
+        "توظيف",
+        "وظائف"
+      ]
     },
     {
       "id": "exam-results",
@@ -298,7 +462,18 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": true
+      "popular": true,
+      "keywords": [
+        "نتيجة",
+        "نتائج",
+        "الشهادة الثانوية",
+        "ثانوية",
+        "اعدادية",
+        "الشهادة الاعدادية",
+        "رقم الجلوس",
+        "امتحانات",
+        "توجيهي"
+      ]
     },
     {
       "id": "universities-system",
@@ -310,7 +485,15 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "جامعة",
+        "جامعات",
+        "تسجيل جامعة",
+        "قبول",
+        "طالب",
+        "المنظومة الموحدة"
+      ]
     },
     {
       "id": "equivalency",
@@ -322,7 +505,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "معادلة",
+        "معادلة شهادة",
+        "شهادة من بره",
+        "شهادة اجنبية",
+        "ضمان الجودة"
+      ]
     },
     {
       "id": "accredited-institutions",
@@ -334,7 +524,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "جامعة خاصة",
+        "معهد خاص",
+        "معتمد",
+        "اعتماد",
+        "كليات خاصة"
+      ]
     },
     {
       "id": "mhesr-tripoli",
@@ -346,7 +543,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "التعليم العالي",
+        "ايفاد",
+        "دراسة بره",
+        "منحة دراسية",
+        "طرابلس"
+      ]
     },
     {
       "id": "mhe-benghazi",
@@ -358,7 +562,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "التعليم العالي",
+        "ايفاد",
+        "دراسة بره",
+        "منحة دراسية",
+        "بنغازي"
+      ]
     },
     {
       "id": "elmergib-registration",
@@ -370,7 +581,13 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "المرقب",
+        "الخمس",
+        "تسجيل جامعة",
+        "قبول"
+      ]
     },
     {
       "id": "asmarya-registration",
@@ -382,7 +599,13 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "الاسمرية",
+        "زليتن",
+        "تسجيل جامعة",
+        "قبول"
+      ]
     },
     {
       "id": "sirte-student-system",
@@ -394,7 +617,12 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "سرت",
+        "بوابة الطالب",
+        "تسجيل جامعة"
+      ]
     },
     {
       "id": "commercial-registry",
@@ -406,7 +634,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "سجل تجاري",
+        "رخصة",
+        "شركة",
+        "تجديد السجل",
+        "علامة تجارية"
+      ]
     },
     {
       "id": "commercial-registry-system",
@@ -418,7 +653,13 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "سجل تجاري",
+        "تسجيل شركة",
+        "فتح شركة",
+        "استعلام شركة"
+      ]
     },
     {
       "id": "economy-eservices",
@@ -430,7 +671,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "رخصة تجارية",
+        "اسم تجاري",
+        "علامة تجارية",
+        "وكالة تجارية",
+        "الاقتصاد"
+      ]
     },
     {
       "id": "foreign-branches",
@@ -442,7 +690,12 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "شركة اجنبية",
+        "فرع شركة",
+        "استثمار اجنبي"
+      ]
     },
     {
       "id": "tax",
@@ -454,7 +707,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "ضرائب",
+        "ضريبة",
+        "شهادة سداد",
+        "طوابع",
+        "ايصال"
+      ]
     },
     {
       "id": "customs",
@@ -466,7 +726,15 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "جمارك",
+        "تعريفة",
+        "شحن",
+        "استيراد",
+        "بضاعة",
+        "اسيكودا"
+      ]
     },
     {
       "id": "upa-companies",
@@ -478,7 +746,13 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "تخطيط عمراني",
+        "مكتب هندسي",
+        "استشارات",
+        "مهندسين"
+      ]
     },
     {
       "id": "upa-experts",
@@ -490,7 +764,13 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "تخطيط عمراني",
+        "خبير",
+        "مستشار",
+        "مهندس"
+      ]
     },
     {
       "id": "pharma-companies",
@@ -502,7 +782,14 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "ادوية",
+        "صيدلة",
+        "صيدلية",
+        "شركة ادوية",
+        "وزارة الصحة"
+      ]
     },
     {
       "id": "finance-ministry",
@@ -514,7 +801,13 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "المالية",
+        "موردين",
+        "تعميمات",
+        "ميزانية"
+      ]
     },
     {
       "id": "ejraat",
@@ -526,7 +819,17 @@
       "steps": [],
       "registration_closed": false,
       "hidden": false,
-      "popular": false
+      "popular": false,
+      "keywords": [
+        "اجراءات",
+        "جواز سفر",
+        "الجواز",
+        "بطاقة شخصية",
+        "الرقم الوطني",
+        "اوراق",
+        "مستندات",
+        "باحث عن عمل"
+      ]
     },
     {
       "id": "gia-services",

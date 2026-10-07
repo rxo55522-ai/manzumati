@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import re
 import shutil
@@ -27,7 +28,7 @@ STATIC = ROOT / "static"
 
 # نفس السياسة موجودة كترويسة في nginx؛ هنا نسخة احتياطية داخل الصفحة نفسها.
 CSP = ("default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; "
-       "img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'self'; "
+       "img-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'self'; "
        "upgrade-insecure-requests")
 
 MONTHS = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو",
@@ -107,9 +108,35 @@ def telegram_url() -> str | None:
     return url
 
 
-def page(title: str, body: str, *, depth: int = 0, description: str = "") -> str:
+def canonical(path: str) -> str:
+    """الرابط الرسمي للصفحة (بدون .html، لأن Cloudflare يشيلها)."""
+    path = path.removesuffix(".html")
+    if path in ("index", ""):
+        path = ""
+    return f"{config.SITE_URL}/{path}"
+
+
+def jsonld(obj: dict) -> str:
+    """بيانات منظمة لقوقل. هذي مش كود يتنفذ، والمتصفح ما يشغلهاش.
+    نمنعو أي "<" داخلها باش ما يقدر حد يسكّر الوسم ويحط كود."""
+    data = json.dumps(obj, ensure_ascii=False, separators=(",", ":"))
+    data = data.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+    return f'<script type="application/ld+json">{data}</script>'
+
+
+DEFAULT_DESC = "كل منظومات الدولة الليبية في مكان واحد: الرابط الرسمي، المنظومة شغالة ولا واقفة، وشن تجهز قبل ما تدخل."
+
+
+def page(title: str, body: str, *, depth: int = 0, description: str = "", path: str = "index.html",
+         structured: dict | None = None, noindex: bool = False) -> str:
     base = "../" * depth
-    desc = description or "كل منظومات الدولة الليبية في مكان واحد: الرابط الرسمي، حالتها الآن، وشن تجهز قبل ما تدخل."
+    desc = description or DEFAULT_DESC
+    url = canonical(path)
+    og_img = f"{config.SITE_URL}/img/og.png"
+    verify = (f'\n<meta name="google-site-verification" content="{esc(config.GOOGLE_SITE_VERIFICATION)}">'
+              if config.GOOGLE_SITE_VERIFICATION and re.fullmatch(r"[A-Za-z0-9_\-]{10,100}", config.GOOGLE_SITE_VERIFICATION) else "")
+    robots = '\n<meta name="robots" content="noindex">' if noindex else ""
+    ld = ("\n" + jsonld(structured)) if structured else ""
     return f"""<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -118,10 +145,27 @@ def page(title: str, body: str, *, depth: int = 0, description: str = "") -> str
 <meta http-equiv="Content-Security-Policy" content="{esc(CSP)}">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>{esc(title)}</title>
-<meta name="description" content="{esc(desc)}">
+<meta name="description" content="{esc(desc)}">{robots}{verify}
+<link rel="canonical" href="{esc(url)}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{esc(config.SITE_NAME)}">
+<meta property="og:locale" content="ar_LY">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(desc)}">
+<meta property="og:url" content="{esc(url)}">
+<meta property="og:image" content="{esc(og_img)}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="منظومتي: كل منظومات الدولة في مكان واحد">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0E5A4A">
 <link rel="icon" href="{base}img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{base}img/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="{base}img/apple-touch-icon.png">
+<link rel="manifest" href="{base}manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="{esc(config.SITE_NAME)}">
 <link rel="stylesheet" href="{base}css/site.css">
-<script src="{base}js/site.js" defer></script>
+<script src="{base}js/site.js" defer></script>{ld}
 </head>
 <body>
 <a class="skip" href="#main">تخطّى للمحتوى</a>
@@ -162,7 +206,7 @@ def status_pill(s: System) -> str:
 def system_row(s: System, depth: int) -> str:
     base = "../" * depth
     cls, _ = status_of(s)
-    search = f"{s.name} {s.agency} {display_host(s.url)}"
+    search = " ".join([s.name, s.agency, display_host(s.url), *s.keywords])
     return (f'<li data-state="{esc(cls)}" data-search="{esc(search)}">'
             f'<a class="row" href="{base}s/{esc(s.id)}.html">'
             f'<span class="row-text"><span class="row-name">{esc(s.name)}</span>'
@@ -224,10 +268,13 @@ def render_index(site: Site) -> str:
   {fb_band(0)}
 </div>
 </main>"""
-    return page(config.SITE_NAME, body)
+    return page(f"{config.SITE_NAME} | كل منظومات الدولة الليبية في مكان واحد", body, path="index.html",
+                structured={"@context": "https://schema.org", "@type": "WebSite", "name": config.SITE_NAME,
+                            "url": f"{config.SITE_URL}/", "inLanguage": "ar", "description": DEFAULT_DESC})
 
 
-def render_list_page(site: Site, *, title: str, lead: str, systems: list[System], with_search: bool) -> str:
+def render_list_page(site: Site, *, title: str, lead: str, systems: list[System], with_search: bool,
+                     path: str = "all.html") -> str:
     rows = "".join(system_row(s, 0) for s in systems)
     search = ""
     if with_search:
@@ -249,7 +296,9 @@ def render_list_page(site: Site, *, title: str, lead: str, systems: list[System]
   <p class="empty" data-empty hidden>ما لقيناش منظومة بهذا الاسم. جرّب كلمة ثانية.</p>
 </section>
 </main>"""
-    return page(f"{title} | {config.SITE_NAME}", body)
+    names = "، ".join(x.name for x in systems[:4])
+    return page(f"{title}: المنظومات الحكومية الليبية | {config.SITE_NAME}", body, path=path,
+                description=f"{lead} {names}، وغيرها: الرابط الرسمي لكل منظومة وحالتها الآن."[:300])
 
 
 def render_system(s: System) -> str:
@@ -319,8 +368,15 @@ def render_system(s: System) -> str:
 </div>
 {fb_band(1)}
 </main>"""
-    return page(f"{s.name} | {config.SITE_NAME}", body, depth=1,
-                description=f"{s.name}: الرابط الرسمي، حالتها الآن، وشن تجهز قبل ما تدخل.")
+    gtitle = GROUPS[s.group][0]
+    crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": config.SITE_NAME, "item": f"{config.SITE_URL}/"},
+        {"@type": "ListItem", "position": 2, "name": gtitle, "item": canonical(f"{s.group}.html")},
+        {"@type": "ListItem", "position": 3, "name": s.name, "item": canonical(f"s/{s.id}.html")},
+    ]}
+    return page(f"{s.name}: الرابط الرسمي وحالتها الآن | {config.SITE_NAME}", body, depth=1, path=f"s/{s.id}.html",
+                description=f"{s.name} من {s.agency}: الرابط الرسمي، المنظومة شغالة ولا واقفة الآن، وشن تجهز قبل ما تدخل.",
+                structured=crumbs)
 
 
 def render_about() -> str:
@@ -347,7 +403,7 @@ def render_about() -> str:
 <section class="panel" id="contact"><h2>اقترح منظومة أو بلّغ عن مشكلة</h2>{fb_line}{contact}
   <p class="muted">لا تبعت رقمك الوطني ولا أي بيانات شخصية.</p></section>
 </main>"""
-    return page(f"عن منظومتي | {config.SITE_NAME}", body)
+    return page(f"عن منظومتي | {config.SITE_NAME}", body, path="about.html")
 
 
 def render_404() -> str:
@@ -355,9 +411,10 @@ def render_404() -> str:
 <span class="rule"></span><h1>الصفحة مش موجودة</h1>
 <p class="lead">ممكن الرابط فيه غلطة، أو الصفحة تنقلت.</p>
 <a class="btn btn-primary" href="/index.html">رجوع للرئيسية</a></section></main>"""
-    return page(f"الصفحة مش موجودة | {config.SITE_NAME}", body).replace('href="img/', 'href="/img/').replace(
+    return page(f"الصفحة مش موجودة | {config.SITE_NAME}", body, noindex=True).replace('href="img/', 'href="/img/').replace(
         'href="css/', 'href="/css/').replace('src="js/', 'src="/js/').replace('href="index.html"', 'href="/index.html"').replace(
-        'href="all.html"', 'href="/all.html"').replace('href="about.html', 'href="/about.html')
+        'href="all.html"', 'href="/all.html"').replace('href="about.html', 'href="/about.html').replace(
+        'href="manifest.webmanifest"', 'href="/manifest.webmanifest"')
 
 
 # ---------- البناء ----------
@@ -381,7 +438,8 @@ def build(out_dir: Path, data_dir: Path, *, extra_hosts: tuple[str, ...] = (), a
         }
         for g, (t, d) in GROUPS.items():
             files[f"{g}.html"] = render_list_page(site, title=t, lead=d + ".",
-                                                  systems=[s for s in site.visible() if s.group == g], with_search=False)
+                                                  systems=[s for s in site.visible() if s.group == g], with_search=False,
+                                                  path=f"{g}.html")
         for s in site.visible():
             files[f"s/{s.id}.html"] = render_system(s)
 
@@ -391,10 +449,12 @@ def build(out_dir: Path, data_dir: Path, *, extra_hosts: tuple[str, ...] = (), a
             dest.write_text(content, encoding="utf-8")
         shutil.copytree(STATIC, tmp, dirs_exist_ok=True)
         (tmp / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {config.SITE_URL}/sitemap.xml\n", encoding="utf-8")
-        urls = [f"{config.SITE_URL}/{p}" for p in files if p != "404.html"]
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        urls = [canonical(p) for p in files if p != "404.html"]
         (tmp / "sitemap.xml").write_text(
             '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-            + "".join(f"  <url><loc>{esc(u)}</loc></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
+            + "".join(f"  <url><loc>{esc(u)}</loc><lastmod>{today}</lastmod></url>\n" for u in urls)
+            + "</urlset>\n", encoding="utf-8")
         for root, dirs, fnames in os.walk(tmp):
             for d in dirs:
                 os.chmod(Path(root) / d, 0o755)

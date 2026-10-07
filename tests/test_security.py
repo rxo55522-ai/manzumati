@@ -42,7 +42,7 @@ class TagScan(HTMLParser):
     def problems(self) -> list[str]:
         bad = []
         for tag, attrs in self.tags:
-            if tag == "script" and "src" not in attrs:
+            if tag == "script" and "src" not in attrs and attrs.get("type") != "application/ld+json":
                 bad.append("سكربت داخل الصفحة")
             if tag in ("style", "iframe", "object", "embed", "base", "form") and not (tag == "form" and attrs.get("method") == "get"):
                 bad.append(f"وسم ممنوع <{tag}>")
@@ -192,6 +192,22 @@ class TestXSS(unittest.TestCase):
                 self.assertFalse(any(t == "img" for t, _ in TagScan(html).tags))
 
 
+class TestStructuredData(unittest.TestCase):
+    def test_jsonld_cannot_break_out(self):
+        tmp = Path(tempfile.mkdtemp())
+        try:
+            evil = '</script><script>alert(1)</script>'
+            d = make_data(tmp, [sys_entry(id="x", name=evil, agency=evil)])
+            out = B.build(tmp / "out", d)
+            html = (out / "s" / "x.html").read_text(encoding="utf-8")
+            block = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S).group(1)
+            self.assertNotIn("<", block)
+            self.assertEqual(json.loads(block)["itemListElement"][2]["name"], evil)   # النص سليم بعد القراءة
+            self.assertEqual(TagScan(html).problems(), [])
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+
 # ---------------------------------------------------------------- 4) فحص الصفحات الحقيقية
 class TestBuiltSite(unittest.TestCase):
     @classmethod
@@ -208,6 +224,17 @@ class TestBuiltSite(unittest.TestCase):
         for f in self.pages:
             with self.subTest(page=f.name):
                 self.assertIn('http-equiv="Content-Security-Policy"', f.read_text(encoding="utf-8"))
+
+    def test_seo_tags_on_every_page(self):
+        for f in self.pages:
+            html = f.read_text(encoding="utf-8")
+            with self.subTest(page=f.name):
+                self.assertIn('rel="canonical"', html)
+                self.assertIn('property="og:image"', html)
+                self.assertIn('rel="manifest"', html)
+        self.assertTrue((self.out / "img" / "og.png").exists())
+        json.loads((self.out / "manifest.webmanifest").read_text(encoding="utf-8"))
+        self.assertIn('name="robots" content="noindex"', (self.out / "404.html").read_text(encoding="utf-8"))
 
     def test_no_inline_script_style_or_handlers(self):
         for f in self.pages:
@@ -233,9 +260,17 @@ class TestBuiltSite(unittest.TestCase):
     def test_no_external_resources(self):
         for f in self.pages:
             html = f.read_text(encoding="utf-8")
-            for m in re.findall(r'<(?:script|link|img)\b[^>]*(?:src|href)="([^"]+)"', html):
-                with self.subTest(res=m):
-                    self.assertFalse(m.startswith(("http", "//")), "مورد من موقع برّا")
+            # الموارد اللي المتصفح يحمّلها فعلاً (رابط canonical مش مورد، هو عنوان الصفحة نفسها)
+            loaded = {"stylesheet", "icon", "apple-touch-icon", "manifest", "preload", "modulepreload", "prefetch"}
+            for tag, attrs in TagScan(html).tags:
+                res = None
+                if tag in ("script", "img", "iframe") and "src" in attrs:
+                    res = attrs["src"]
+                elif tag == "link" and loaded & set(attrs.get("rel", "").split()):
+                    res = attrs.get("href", "")
+                if res is not None:
+                    with self.subTest(res=res):
+                        self.assertFalse(res.startswith(("http", "//")), "مورد من موقع برّا")
         css = (self.out / "css" / "site.css").read_text(encoding="utf-8")
         self.assertNotRegex(css, r"url\(\s*['\"]?(https?:)?//")
         self.assertNotIn("@import", css)

@@ -5,17 +5,32 @@
 (function () {
   "use strict";
 
-  // توحيد الكتابة العربية: أ/إ/آ ← ا، ة ← ه، ى ← ي، وحذف التشكيل والتطويل
+  // توحيد الكتابة العربية باش البحث يلقى الكلمة مهما كانت مكتوبة:
+  // أ/إ/آ ← ا، ة ← ه، ى ← ي، ؤ ← و، ئ ← ي، الأرقام العربية ← إنجليزية، وحذف التشكيل والتطويل
   function norm(s) {
     return String(s || "")
       .toLowerCase()
-      .replace(/[ً-ْـ]/g, "")
-      .replace(/[أإآ]/g, "ا")
+      .replace(/[\u064B-\u0652\u0640]/g, "")
+      .replace(/[أإآٱ]/g, "ا")
       .replace(/ة/g, "ه")
       .replace(/ى/g, "ي")
+      .replace(/ؤ/g, "و")
+      .replace(/ئ/g, "ي")
+      .replace(/[٠-٩]/g, function (d) { return String(d.charCodeAt(0) - 0x0660); })
+      .replace(/[^\u0621-\u064Aa-z0-9 ]+/g, " ")
       .replace(/\s+/g, " ")
-      .trim()
-      .slice(0, 60);
+      .trim();
+  }
+
+  // نشيلو "ال" و "وال" من أول الكلمة: "المرتب" و "مرتب" و "والمرتب" يلقو نفس النتيجة
+  function stem(w) {
+    if (w.length > 4 && w.indexOf("وال") === 0) return w.slice(3);
+    if (w.length > 3 && w.indexOf("ال") === 0) return w.slice(2);
+    return w;
+  }
+
+  function words(s) {
+    return norm(s).split(" ").filter(Boolean).map(stem);
   }
 
   var list = document.querySelector("[data-list]");
@@ -26,13 +41,14 @@
   var filters = document.querySelector("[data-filters]");
   var current = "all";
 
-  items.forEach(function (li) { li._s = norm(li.getAttribute("data-search")); });
+  items.forEach(function (li) { li._s = " " + words(li.getAttribute("data-search")).join(" "); });
 
   function apply() {
-    var words = input ? norm(input.value).split(" ").filter(Boolean) : [];
+    var q = input ? words(String(input.value).slice(0, 60)) : [];
     var shown = 0;
     items.forEach(function (li) {
-      var okWords = words.every(function (w) { return li._s.indexOf(w) !== -1; });
+      // كل كلمة من البحث لازم تكون بداية كلمة في بيانات المنظومة ("مرت" تلقى "مرتب")
+      var okWords = q.every(function (w) { return li._s.indexOf(" " + w) !== -1; });
       var st = li.getAttribute("data-state");
       var okState = current === "all" || (current === "up" ? st === "up" : st === "down");
       var show = okWords && okState;

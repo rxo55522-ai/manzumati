@@ -43,6 +43,7 @@ class System:
     registration_closed: bool
     hidden: bool
     popular: bool
+    keywords: list[str] = field(default_factory=list)
     state: str = "unknown"        # up / down / suspicious / unknown
     checked_at: str | None = None
 
@@ -108,6 +109,10 @@ def load_site(data_dir: Path, *, extra_hosts: tuple[str, ...] = (), allow_http: 
         if len(steps) != len(steps_raw):
             raise DataError(f"[{sid}] كل خطوة لازم يكون فيها title و text")
 
+        kw = obj.get("keywords") or []
+        if not isinstance(kw, list) or len(kw) > 25 or not all(isinstance(k, str) and 0 < len(k) <= 40 for k in kw):
+            raise DataError(f"[{sid}] كلمات البحث لازم تكون قائمة نصوص قصيرة (25 كلمة كحد أقصى)")
+
         st = status.get(sid, {}) if isinstance(status, dict) else {}
         state = st.get("state") if st.get("state") in ("up", "down", "suspicious") else "unknown"
         checked = st.get("checked_at") if isinstance(st.get("checked_at"), str) else None
@@ -125,6 +130,7 @@ def load_site(data_dir: Path, *, extra_hosts: tuple[str, ...] = (), allow_http: 
             registration_closed=_bool(obj, "registration_closed", sid),
             hidden=_bool(obj, "hidden", sid),
             popular=_bool(obj, "popular", sid),
+            keywords=[k.strip() for k in kw],
             state=state,
             checked_at=checked,
         ))
