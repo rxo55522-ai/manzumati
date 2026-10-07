@@ -52,6 +52,8 @@ ICON_SEARCH = ('<svg width="22" height="22" viewBox="0 0 24 24" class="ic" aria-
 ICON_MEGAPHONE = ('<svg width="22" height="22" viewBox="0 0 24 24" class="ic" aria-hidden="true" focusable="false">'
                   '<path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/>'
                   '<path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>')
+ICON_SEND = ('<svg width="22" height="22" viewBox="0 0 24 24" class="ic" aria-hidden="true" focusable="false">'
+             '<path d="M21 3L3 10.5l7 2.5 2.5 7L21 3z"/><path d="M10 13l4.5-4.5"/></svg>')
 GROUP_ICONS = {
     "citizen": "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 20a8 8 0 0 1 16 0",
     "students": "M3 9l9-5 9 5-9 5-9-5zM7 11.5V16c0 1.5 2.5 3 5 3s5-1.5 5-3v-4.5",
@@ -93,6 +95,15 @@ def facebook_url() -> str | None:
         return None
     if not re.fullmatch(r"https://www\.facebook\.com/[A-Za-z0-9.\-_/?=]{1,120}", url):
         raise DataError("FACEBOOK_URL لازم يكون رابط صفحة فيسبوك يبدأ بـ https://www.facebook.com/")
+    return url
+
+
+def telegram_url() -> str | None:
+    url = config.TELEGRAM_URL.strip()
+    if not url:
+        return None
+    if not re.fullmatch(r"https://t\.me/[A-Za-z][A-Za-z0-9_]{4,31}", url):
+        raise DataError("TELEGRAM_URL لازم يكون رابط قناة يبدأ بـ https://t.me/ وبعده اسم القناة بس")
     return url
 
 
@@ -159,13 +170,26 @@ def system_row(s: System, depth: int) -> str:
 
 
 def fb_band(depth: int) -> str:
-    url = facebook_url()
-    if not url:
+    """قسم المتابعة: قناة التنبيهات على تيليجرام + صفحة الفيسبوك."""
+    fb, tg = facebook_url(), telegram_url()
+    if not fb and not tg:
         return ""
+    if tg:
+        title = "ما تقعدش تجرّب كل شوية"
+        text = "اشترك في قناتنا على تيليجرام، ونبلغوك أول ما منظومتك ترجع تخدم."
+    else:
+        title = "تابع صفحتنا على فيسبوك"
+        text = "أول ما تفتح منظومة أو تتغير حاجة فيها، تلقاها عندنا في الصفحة."
+    btns = ""
+    if tg:
+        btns += f'<a class="btn btn-gold" href="{esc(tg)}" rel="noopener noreferrer">{ICON_SEND}اشترك في القناة</a>'
+    if fb:
+        cls = "btn btn-ghost" if tg else "btn btn-gold"
+        btns += f'<a class="{cls}" href="{esc(fb)}" rel="noopener noreferrer">{ICON_MEGAPHONE}صفحتنا على فيسبوك</a>'
     return f"""<section class="band" aria-labelledby="fbh">
-  <div class="band-text"><h2 id="fbh">تابع صفحتنا على فيسبوك</h2>
-  <p>أول ما تفتح منظومة أو تتغير حاجة فيها، تلقاها عندنا في الصفحة.</p></div>
-  <a class="btn btn-gold" href="{esc(url)}" rel="noopener noreferrer">{ICON_MEGAPHONE}افتح صفحة الفيسبوك</a>
+  <div class="band-text"><h2 id="fbh">{esc(title)}</h2>
+  <p>{esc(text)}</p></div>
+  <div class="band-actions">{btns}</div>
 </section>"""
 
 
@@ -237,11 +261,14 @@ def render_system(s: System) -> str:
     alert = ""
     enter_btn = (f'<a class="btn btn-primary btn-wide" href="{esc(s.safe_url)}" rel="noopener noreferrer">'
                  f'ادخل للمنظومة{ICON_ARROW}</a>')
+    tg = telegram_url()
+    tg_line = (f'<p class="alert-tg">ما تقعدش تجرّب كل شوية: <a href="{esc(tg)}" rel="noopener noreferrer">'
+               f'اشترك في القناة</a> ونبلغوك أول ما ترجع.</p>') if tg else ""
     if cls == "down":
         alert = f"""<section class="alert alert-down">
   <div><h2>المنظومة واقفة الآن</h2>
-  <p>المشكلة مش منك، المنظومة نفسها متردش حالياً، وهذا يصير كثير لما يكون عليها ضغط. استنى شوية وجرّب مرة ثانية.</p>
-  {checked_line}</div>
+  <p>المشكلة مش منك، المنظومة نفسها متردش حالياً، وهذا يصير هلبا لما يكون عليها ضغط. استنى شوية وجرّب مرة ثانية.</p>
+  {checked_line}{tg_line}</div>
   <a class="btn btn-primary" href="{esc(s.safe_url)}" rel="noopener noreferrer">{ICON_RETRY}جرّب مرة ثانية</a>
 </section>"""
         enter_btn = ""
@@ -303,6 +330,10 @@ def render_about() -> str:
     fb_line = (f'<p>تعرف منظومة مش موجودة عندنا، أو لقيت رابط غلط؟ ابعتلنا رسالة على '
                f'<a href="{esc(fb)}" rel="noopener noreferrer">صفحتنا في فيسبوك</a>.</p>') if fb else \
               '<p>تعرف منظومة مش موجودة عندنا، أو لقيت رابط غلط؟ ابعتلنا رسالة على صفحتنا في فيسبوك.</p>'
+    tg = telegram_url()
+    if tg:
+        fb_line += (f'<p>وباش يوصلك تنبيه لما منظومة توقف أو ترجع تخدم، اشترك في '
+                    f'<a href="{esc(tg)}" rel="noopener noreferrer">قناة التنبيهات على تيليجرام</a>.</p>')
     body = f"""<main id="main" class="wrap stack-sm">
 <section class="panel head-panel">
   <span class="rule"></span><h1>عن منظومتي</h1>
@@ -333,7 +364,8 @@ def render_404() -> str:
 
 def build(out_dir: Path, data_dir: Path, *, extra_hosts: tuple[str, ...] = (), allow_http: bool = False) -> Path:
     site = load_site(data_dir, extra_hosts=extra_hosts, allow_http=allow_http)
-    facebook_url()  # يتحقق من الرابط قبل ما نبنو أي صفحة
+    facebook_url()  # يتحقق من الروابط قبل ما نبنو أي صفحة
+    telegram_url()
 
     out_dir.mkdir(parents=True, exist_ok=True)
     releases = out_dir / "releases"
