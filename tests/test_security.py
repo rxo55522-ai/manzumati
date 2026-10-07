@@ -214,7 +214,14 @@ class TestBuiltSite(unittest.TestCase):
     def setUpClass(cls):
         cls.tmp = Path(tempfile.mkdtemp())
         cls.out = B.build(cls.tmp / "out", DATA)
-        cls.pages = list(cls.out.rglob("*.html"))
+        # ملفات التحقق متاع Google Search Console (googleXXXX.html) مش صفحات من الموقع.
+        # نستثنوها بس لو محتواها هو السطر المعروف بالزبط، باش ما يتخباش فيها أي شي ثاني.
+        cls.pages, cls.verify_files = [], []
+        for f in cls.out.rglob("*.html"):
+            if re.fullmatch(r"google[0-9a-f]{16}\.html", f.name):
+                cls.verify_files.append(f)
+            else:
+                cls.pages.append(f)
 
     @classmethod
     def tearDownClass(cls):
@@ -224,6 +231,11 @@ class TestBuiltSite(unittest.TestCase):
         for f in self.pages:
             with self.subTest(page=f.name):
                 self.assertIn('http-equiv="Content-Security-Policy"', f.read_text(encoding="utf-8"))
+
+    def test_google_verification_files_are_plain(self):
+        for f in self.verify_files:
+            with self.subTest(f=f.name):
+                self.assertEqual(f.read_text(encoding="utf-8").strip(), f"google-site-verification: {f.name}")
 
     def test_seo_tags_on_every_page(self):
         for f in self.pages:
