@@ -73,6 +73,19 @@ class SafeRedirect(urllib.request.HTTPRedirectHandler):
         return super().redirect_request(req, fp, code, msg, headers, target)
 
 
+# 404 و 410: الصفحة نفسها مش موجودة، يعني المواطن يلقى صفحة خطأ → نعتبروها واقفة.
+# باقي أخطاء 4xx (مثلاً 401 و 403): السيرفر حي لكن يطلب دخول أو يقفل في وجه البرامج الآلية،
+# والمواطن من المتصفح غالباً يدخل عادي → نعتبروها شغالة.
+# 5xx: عطل في السيرفر → واقفة.
+NOT_FOUND = {404, 410}
+
+
+def _classify(code: int) -> str:
+    if code in NOT_FOUND or code >= 500 or code < 400:
+        return "fail"
+    return "ok"
+
+
 def probe(url: str, extra_hosts: tuple[str, ...] = ()) -> str:
     """يرجع: ok / fail / suspicious."""
     ctx = ssl.create_default_context()           # التحقق من الشهادة مفعّل دائماً
@@ -86,13 +99,13 @@ def probe(url: str, extra_hosts: tuple[str, ...] = ()) -> str:
     try:
         with opener.open(req, timeout=TIMEOUT) as resp:
             resp.read(MAX_BYTES)
-            return "ok" if resp.status < 500 else "fail"
+            return "ok" if resp.status < 400 else _classify(resp.status)
     except Suspicious:
         return "suspicious"
     except urllib.error.HTTPError as e:
         # 4xx معناها السيرفر حي ويرد (مثلاً يطلب تسجيل دخول)، 5xx معناها عطل
         # 3xx هنا معناها تحويلات بلا نهاية أو تحويل مكسور: نعتبروها عطل
-        return "ok" if 400 <= e.code < 500 else "fail"
+        return _classify(e.code)
     except (urllib.error.URLError, socket.timeout, TimeoutError, ConnectionError, ssl.SSLError, OSError):
         return "fail"
     except Exception:
