@@ -60,3 +60,17 @@ jobs:
           python -m manzumati.build --flat --out site
           npx --yes wrangler@4 pages project create "$PROJECT" --production-branch main || true
           npx --yes wrangler@4 pages deploy site --project-name "$PROJECT" --branch main --commit-dirty=true
+
+      - name: Telegram alerts
+        if: steps.check.outputs.deploy == 'true'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python tools/notify_telegram.py "$RUNNER_TEMP/old-status.json" data/status.json
+
+      - name: Telegram test
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python tools/notify_telegram.py --test
