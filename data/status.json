@@ -1,240 +1,240 @@
 {
  "accredited-institutions": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "asmarya-registration": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "basic-pension": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "cement-booking": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
-  "fails": 16,
+  "checked_at": "2026-10-10T17:28:57+00:00",
+  "fails": 17,
   "source": "checker",
   "state": "down"
  },
  "children-grant": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "commercial-registry": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "commercial-registry-system": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
-  "fails": 16,
+  "checked_at": "2026-10-10T17:28:57+00:00",
+  "fails": 17,
   "source": "checker",
   "state": "down"
  },
  "consumer-coops": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
-  "fails": 16,
+  "checked_at": "2026-10-10T17:28:57+00:00",
+  "fails": 17,
   "source": "checker",
   "state": "down"
  },
  "criminal-record": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
-  "fails": 13,
+  "checked_at": "2026-10-10T17:28:57+00:00",
+  "fails": 14,
   "source": "checker",
   "state": "down"
  },
  "customs": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "economy-eservices": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "eifaa-card": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
-  "fails": 16,
+  "checked_at": "2026-10-10T17:28:57+00:00",
+  "fails": 17,
   "source": "checker",
   "state": "down"
  },
  "ejraat": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "election-results": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
-  "fails": 16,
+  "checked_at": "2026-10-10T17:28:57+00:00",
+  "fails": 17,
   "source": "checker",
   "state": "down"
  },
  "elmergib-registration": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "equivalency": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "evisa": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "exam-results": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "finance-ministry": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "foreign-branches": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "foreign-currency": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "hajj": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "lypay": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "mhe-benghazi": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "mhesr-tripoli": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
-  "fails": 16,
+  "checked_at": "2026-10-10T17:28:57+00:00",
+  "fails": 17,
   "source": "checker",
   "state": "down"
  },
  "noc-graduates": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "noc-graduates-disability": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
-  "fails": 16,
+  "checked_at": "2026-10-10T17:28:57+00:00",
+  "fails": 17,
   "source": "checker",
   "state": "down"
  },
  "pharma-companies": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
-  "fails": 16,
+  "checked_at": "2026-10-10T17:28:57+00:00",
+  "fails": 17,
   "source": "checker",
   "state": "down"
  },
  "ratebak": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
-  "fails": 16,
+  "checked_at": "2026-10-10T17:28:57+00:00",
+  "fails": 17,
   "source": "checker",
   "state": "down"
  },
  "ratebak-stats": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "sirte-student-system": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "social-security": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "tax": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "telecom-complaints": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "universities-system": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
-  "fails": 16,
+  "checked_at": "2026-10-10T17:28:57+00:00",
+  "fails": 17,
   "source": "checker",
   "state": "down"
  },
  "upa-companies": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "upa-experts": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "wife-daughters-grant": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "youth-travel-fund": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
  },
  "zakat-app": {
-  "checked_at": "2026-10-10T12:45:36+00:00",
+  "checked_at": "2026-10-10T17:28:57+00:00",
   "fails": 0,
   "source": "checker",
   "state": "up"
